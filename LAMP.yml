@@ -1,0 +1,24 @@
+---
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: chandu
+      MYSQL_DATABASE: chandu
+      MYSQL_USER: chandu
+      MYSQL_PASSWORD: chandu
+      container_name: mysql
+  Apache:
+    image: httpd
+    ports:
+      - 9090:80
+    links:
+      - database:mysql
+    container_name: Apache
+  php:
+    image: php:7.2-apache
+    links:
+      - database:mysql
+      - Apache:htpd
+    container_name: php
+
