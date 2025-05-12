@@ -6,9 +6,11 @@ services:
       POSTGRES_USER: CHANDU
       POSTGRES_PASSWORD: CHANDU
       POSTGRES_DB: CHANDU
+    container_name: postgres
   admin:
     image: adminer
     ports:
       - 9090:8080
     links:
       - database:postgres
+    container_name: adminer
