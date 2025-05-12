@@ -1,0 +1,17 @@
+---
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: CHANDU
+      MYSQL_DATABASE: CHANDU
+      MYSQL_USER: CHANDU
+      MYSQL_PASSWORD: CHANDU
+    container_name: mysql
+  url:
+    image: adminer
+    ports:
+      - 9090:8080
+    links:
+      - database:mysql
+    container_name: adminer
