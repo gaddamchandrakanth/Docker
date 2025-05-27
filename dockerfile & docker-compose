@@ -1,0 +1,46 @@
+dockerfile image
+
+FROM jenkins/jenkins
+MAINTAINER chandu
+USER root
+RUN apt-get update
+RUN apt-get install -y maven git tree
+WORKDIR /root
+ADD https://get.jenkins.io/war-stable/2.504.1/jenkins.war .
+COPY file1 .
+
+docker-compose 
+
+---
+services:
+  jenkins:
+    image: jenkins-mvn-tree-git
+    ports:
+      - 6060:8080
+    networks:
+      - abc
+    volumes:
+      - myjenkins:/webapps/myapp.war:/usr/local/tomcat/webapps/myapp.war
+  Qaserver:
+    image: tomcat
+    ports:
+      - 7070:8080
+    networks:
+      - xyz
+    volumes:
+      - mytomcat:/myapp.war:/usr/local/tomcat/webapps/myapp.war
+  prodserver:
+    image: tomcat
+    ports:
+      - 9090:8080
+    networks:
+      - xyz
+    volumes:
+      - mytomcat:/myapp.war:/usr/local/tomcat/webapps/myapp.war
+networks:
+  abc: {}
+  xyz: {}
+volumes:
+  myjenkins:
+  mytomcat:
+
