@@ -31,6 +31,7 @@ services:
         - node.hostname==worker1
     networks:
       - gaddam2
+  
   prodserver:
     image: tomcat
     ports:
