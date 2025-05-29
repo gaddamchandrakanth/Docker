@@ -1,0 +1,53 @@
+---
+services:
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - 5050:8080
+    deploy:
+      replicas: 3
+    palcements:
+      constraints:
+      - node.hostname==manager
+    resources:
+      limits:
+        cpus: "0.3"
+        memory: "512M"
+    networks:
+      - gaddam1
+
+  qaserver:
+    image: tomcat
+    ports:
+      - 6060:8080
+    deploy:
+      replicas: 2
+    resources:
+      limits:
+        cpus: "0.3"
+        memory: "512M"
+    palcements:
+      constraints:
+        - node.hostname==worker1
+    networks:
+      - gaddam2
+  prodserver:
+    image: tomcat
+    ports:
+      - 9090:8080
+    deploy:
+      replicas: 2
+    resources:
+      limits:
+        cpus: "0.9"
+        memory: "250M"
+   palcements:
+      constraints:
+      - node.hostname==worker2
+    networks:
+      - gaddam2
+
+networks:
+  gaddam1: {}
+  gaddam2: {}
+...
